@@ -1,7 +1,7 @@
 Summary:	software package for booting x86 PCs over a network
 Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	5.0.1
+Version:	5.0.4
 Release:	1
 License:	GPL
 Group:		Applications/System
@@ -11,7 +11,7 @@ Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
 Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-%{version}.tar.bz2
 Patch0:		%{name}-oformat.patch
 URL:		http://etherboot.sourceforge.net/
-Exclusivearch:	%{ix86}
+ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
