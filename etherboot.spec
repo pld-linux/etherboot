@@ -1,8 +1,8 @@
-Summary:	software package for booting x86 PCs over a network
-Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
+Summary:	Software package for booting x86 PCs over a network
+Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
 Version:	5.0.4
-Release:	0.9
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
@@ -46,12 +46,11 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/{lzrom,rom}
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_libdir}/%{name}/{lzrom,rom},%{_bindir}}
 
-install src/bin32/*.rom		$RPM_BUILD_ROOT%{_libdir}/%{name}/rom
-install src/bin32/*.lzrom	$RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
-install src/bin/*.bin	$RPM_BUILD_ROOT%{_libdir}/%{name}
+install src/bin32/*.rom $RPM_BUILD_ROOT%{_libdir}/%{name}/rom
+install src/bin32/*.lzrom $RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
+install src/bin/*.bin $RPM_BUILD_ROOT%{_libdir}/%{name}
 install src/bin/makerom	$RPM_BUILD_ROOT%{_bindir}/makerom
 
 gzip -9nf INSTALL RELNOTES doc/text/*txt src/NIC
