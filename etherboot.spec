@@ -62,4 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz index.html doc/text/*.gz contrib src/*.gz
 %{_libdir}/%{name}
-%attr(751,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
