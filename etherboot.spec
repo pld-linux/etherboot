@@ -1,13 +1,14 @@
 Summary:	software package for booting x86 PCs over a network
 Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	4.7.18
+Version:	5.0.0
 Release:	1
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
 Group(pl):	Aplikacje/System
-Source0:	http://etherboot.sourceforge.net/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2     
+Patch0:		%{name}-oformat.patch
 URL:		http://etherboot.sourceforge.net/
 Exclusivearch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,22 +40,18 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+# we don't use custom optimalizations here because it can cause problems
 %{__make} -C src
-%{__make} -C mknbi-1.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{_libdir}/%{name}/{lzrom,rom}} \
-	$RPM_BUILD_ROOT%{_mandir}/man1
+install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/{lzrom,rom}
 
-install src/bin32/*.rom $RPM_BUILD_ROOT%{_libdir}/%{name}/rom
-install src/bin32/*.lzrom $RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
-
-install mknbi-*/{dismbr,disnbi,mklnim,mknbi} $RPM_BUILD_ROOT%{_sbindir}
-install mknbi-*/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/
-install mknbi-*/*.pl $RPM_BUILD_ROOT%{_libdir}/%{name}
+install src/bin32/*.rom		$RPM_BUILD_ROOT%{_libdir}/%{name}/rom
+install src/bin32/*.lzrom	$RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
 
 gzip -9nf INSTALL RELNOTES doc/text/*txt src/NIC
 
@@ -64,9 +61,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz index.html doc/text/*.gz contrib src/*.gz
-%attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/%{name}/*.pl
-%{_libdir}/%{name}/rom
-%{_libdir}/%{name}/lzrom
-%attr(644,root,root) %{_mandir}/man1/*
-%attr(755,root,root) %dir %{_libdir}/%{name}
+%{_libdir}/%{name}
