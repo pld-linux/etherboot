@@ -1,15 +1,15 @@
-%define		_doc_version	5.0.11
+%define		_doc_version	5.2.2
 Summary:	Software package for booting x86 PCs over a network
 Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	5.0.11
+Version:	5.3.7
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
-# Source0-md5:	f23e90c9e33916fb1f0298ef67810b05
+# Source0-md5:	2ec8f55efa36d585a97e8d87aa44691f
 Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-%{_doc_version}.tar.bz2
-# Source1-md5:	f178fd5324f7860d1cdd8372e286a334
+# Source1-md5:	1531d654a9534361c5339d931d5f92f4
 URL:		http://etherboot.sourceforge.net/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,8 +44,10 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %build
 # we don't use custom optimalizations here because it can cause problems
-%{__make} -C src
-%{__make} bin/boot1a.bin -C src
+%{__make} -C src \
+	CC="%{__cc}"
+%{__make} bin/boot1a.bin -C src \
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
