@@ -5,8 +5,8 @@ Version:	5.0.8
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
-Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-5.0.7.tar.bz2
+Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
+Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-5.0.7.tar.bz2
 URL:		http://etherboot.sourceforge.net/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
