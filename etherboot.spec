@@ -1,7 +1,7 @@
 Summary:	software package for booting x86 PCs over a network
 Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	4.7.14
+Version:	4.7.18
 Release:	1
 License:	GPL
 Group:		Applications/System
