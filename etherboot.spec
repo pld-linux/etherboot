@@ -7,7 +7,6 @@ License:	GPL
 Group:		Applications/System
 Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
 Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-%{version}.tar.bz2
-Patch0:		%{name}-oformat.patch
 URL:		http://etherboot.sourceforge.net/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,18 +38,21 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %prep
 %setup -q -a1
-%patch0 -p1
 
 %build
 # we don't use custom optimalizations here because it can cause problems
 %{__make} -C src
+%{__make} bin/boot1a.bin -C src
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/{lzrom,rom}
+install -d $RPM_BUILD_ROOT%{_bindir}
 
 install src/bin32/*.rom		$RPM_BUILD_ROOT%{_libdir}/%{name}/rom
 install src/bin32/*.lzrom	$RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
+install src/bin/*.bin	$RPM_BUILD_ROOT%{_libdir}/%{name}
+install src/bin/makerom	$RPM_BUILD_ROOT%{_bindir}/makerom
 
 gzip -9nf INSTALL RELNOTES doc/text/*txt src/NIC
 
@@ -61,3 +63,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz index.html doc/text/*.gz contrib src/*.gz
 %{_libdir}/%{name}
+%attr(751,root,root) %{_bindir}
