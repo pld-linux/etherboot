@@ -6,7 +6,7 @@ Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
 Source:		http://www.slug.org.au/etherboot/%{name}-%{version}.tar.bz2
 Patch:		etherboot-fixes.patch
 Group:		Utilities/System
-Group(pl):	Narzedzia/System
+Group(pl):	Narzêdzia/System
 BuildRequires:	bin86
 Copyright:	GPL
 URL:		http://www.slug.org.au/etherboot/
