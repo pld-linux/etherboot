@@ -1,5 +1,5 @@
 Name:		etherboot
-Version:	4.2.5
+Version:	4.2.6
 Release:	1
 Summary:	software package for booting x86 PCs over a network
 Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
