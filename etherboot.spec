@@ -1,12 +1,12 @@
 Summary:	Software package for booting x86 PCs over a network
 Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	5.0.7
+Version:	5.0.8
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
-Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-%{version}.tar.bz2
+Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-5.0.7.tar.bz2
 URL:		http://etherboot.sourceforge.net/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,13 +53,11 @@ install src/bin32/*.lzrom $RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
 install src/bin/*.bin $RPM_BUILD_ROOT%{_libdir}/%{name}
 install src/bin/makerom	$RPM_BUILD_ROOT%{_bindir}/makerom
 
-gzip -9nf INSTALL RELNOTES doc/text/*txt src/NIC
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz index.html doc/text/*.gz contrib src/*.gz
+%doc index.html contrib INSTALL RELNOTES doc/text/*txt src/NIC
 %{_libdir}/%{name}
 %attr(755,root,root) %{_bindir}/*
