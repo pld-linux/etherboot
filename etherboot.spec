@@ -9,7 +9,7 @@ Group(de):	Applikationen/System
 Group(pl):	Aplikacje/System
 Source0:	ftp://download.sourceforge.net/pub/sourceforge/etherboot/%{name}-%{version}.tar.bz2
 URL:		http://etherboot.sourceforge.net/
-Exclusivearch:	%{x86}
+Exclusivearch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
