@@ -6,7 +6,9 @@ Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
+# Source0-md5:	fbc4e06e1b5dc9be1c997463777d8c3b
 Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-5.0.7.tar.bz2
+# Source1-md5:	ed23a11e58a1d556eb1c41735b8cc8ab
 URL:		http://etherboot.sourceforge.net/
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
