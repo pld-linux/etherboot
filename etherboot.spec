@@ -10,7 +10,7 @@ Group(pl):	Narzedzia/System
 BuildRequires:	bin86
 Copyright:	GPL
 URL:		http://www.slug.org.au/etherboot/
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 #ExcludeArch:	i386
 
 %description
