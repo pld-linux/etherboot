@@ -1,17 +1,16 @@
 Summary:	software package for booting x86 PCs over a network
 Summary(pl):	oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	4.2.6
+Version:	4.7.13
 Release:	1
 License:	GPL
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
-Source0:	http://www.slug.org.au/etherboot/%{name}-%{version}.tar.bz2
-Patch0:		etherboot-fixes.patch
-URL:		http://www.slug.org.au/etherboot/
-BuildRequires:	bin86
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
+Source0:	ftp://download.sourceforge.net/pub/sourceforge/etherboot/%{name}-%{version}.tar.bz2
+URL:		http://etherboot.sourceforge.net/
+ExcludeArch:	%{x86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-#ExcludeArch:	i386
 
 %description
 Etherboot is a free software package for booting x86 PCs over a
@@ -39,44 +38,35 @@ adresów (broadcasting)). W praktyce wymagania co do przepustowo¶ci
 WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %prep
-%setup -q -n %{name}-4.2
-%patch -p1
+%setup -q
 
 %build
-cd netboot-* && %configure && make && cd ..
-cd src-32 && make && cd ..
+%{__make} -C src
+%{__make} -C mknbi-1.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{_libdir}/%{name}/{lzrom,rom}} \
+	$RPM_BUILD_ROOT%{_mandir}/man1
 
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{_datadir}/%{name}/{bin,lzrom,rom}} \
-	RPM_BUILD_ROOT%{_mandir}/man8
+install src/bin32/*.rom $RPM_BUILD_ROOT%{_libdir}/%{name}/rom
+install src/bin32/*.lzrom $RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
 
-install src-32/*.bin $RPM_BUILD_ROOT%{_datadir}/%{name}/bin
-install src-32/*.rom $RPM_BUILD_ROOT%{_datadir}/%{name}/rom
-install src-32/*.lzrom $RPM_BUILD_ROOT%{_datadir}/%{name}/lzrom
+install mknbi-*/{dismbr,disnbi,mklnim,mknbi} $RPM_BUILD_ROOT%{_sbindir}
+install mknbi-*/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/
+install mknbi-*/*.pl $RPM_BUILD_ROOT%{_libdir}/%{name}
 
-install -s netboot-*/mknbi-blkdev/makec	 $RPM_BUILD_ROOT%{_sbindir}/makec-blkdev
-install -s netboot-*/mknbi-blkdev/mknbi	 $RPM_BUILD_ROOT%{_sbindir}/mknbi-blkdev
-install netboot-*/mknbi-blkdev/mknbi.man $RPM_BUILD_ROOT%{_mandir}/man8/mknbi-blkdev.8
-install -s netboot-*/mknbi-dos/mknbi	 $RPM_BUILD_ROOT%{_sbindir}/mknbi-dos
-install netboot-*/mknbi-dos/mknbi.man	 $RPM_BUILD_ROOT%{_mandir}/man8/mknbi-dos.8
-install -s netboot-*/mknbi-linux/mknbi	 $RPM_BUILD_ROOT%{_sbindir}/mknbi-linux
-install netboot-*/mknbi-linux/mknbi.man  $RPM_BUILD_ROOT%{_mandir}/man8/mknbi-linux.8
-
-gzip -9nf INSTALL RELNOTES index.html doc/html/* $RPM_BUILD_ROOT%{_mandir}/man8/*
+gzip -9nf INSTALL RELNOTES doc/text/*txt src/NIC
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {INSTALL,RELNOTES,index.html}.gz
-%doc doc/html/* contrib
+%doc *.gz index.html doc/text/*.gz contrib src/*.gz
 %attr(755,root,root) %{_sbindir}/*
-%attr(644,root,root) %{_mandir}/man8/*
-%attr(644,root,root) %{_datadir}/%{name}/*/*
-%attr(755,root,root) %dir %{_datadir}/%{name}
-%attr(755,root,root) %dir %{_datadir}/%{name}/bin
-%attr(755,root,root) %dir %{_datadir}/%{name}/rom
-%attr(755,root,root) %dir %{_datadir}/%{name}/lzrom
+%attr(755,root,root) %{_libdir}/%{name}/*.pl
+%{_libdir}/%{name}/rom
+%{_libdir}/%{name}/lzrom
+%attr(644,root,root) %{_mandir}/man1/*
+%attr(755,root,root) %dir %{_libdir}/%{name}
