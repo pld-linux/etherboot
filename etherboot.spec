@@ -5,7 +5,7 @@ Version:	5.0.4
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2     
+Source0:	http://prdownloads.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
 Source1:	http://prdownloads.sourceforge.net/etherboot/%{name}-doc-%{version}.tar.bz2
 Patch0:		%{name}-oformat.patch
 URL:		http://etherboot.sourceforge.net/
