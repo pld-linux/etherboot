@@ -2,12 +2,12 @@
 Summary:	Software package for booting x86 PCs over a network
 Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	5.3.7
-Release:	1
+Version:	5.4.1
+Release:	0.1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
-# Source0-md5:	2ec8f55efa36d585a97e8d87aa44691f
+# Source0-md5:	9d8666f32ca259a045130487e382f88b
 Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-%{_doc_version}.tar.bz2
 # Source1-md5:	1531d654a9534361c5339d931d5f92f4
 URL:		http://etherboot.sourceforge.net/
@@ -44,25 +44,22 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %build
 # we don't use custom optimalizations here because it can cause problems
-%{__make} -C src \
-	CC="%{__cc}"
-%{__make} bin/boot1a.bin -C src \
+%{__make} allzroms alllisos -C src \
 	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir}/%{name}/{lzrom,rom},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_libdir}/%{name}/{zrom,liso},%{_bindir}}
 
-install src/bin32/*.rom $RPM_BUILD_ROOT%{_libdir}/%{name}/rom
-install src/bin32/*.lzrom $RPM_BUILD_ROOT%{_libdir}/%{name}/lzrom
-install src/bin/*.bin $RPM_BUILD_ROOT%{_libdir}/%{name}
-install src/bin/makerom	$RPM_BUILD_ROOT%{_bindir}/makerom
+install src/bin/*.zrom $RPM_BUILD_ROOT%{_libdir}/%{name}/zrom
+install src/bin/*.liso $RPM_BUILD_ROOT%{_libdir}/%{name}/liso
+install src/util/makerom.pl $RPM_BUILD_ROOT%{_bindir}/makerom.pl
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc index.html contrib INSTALL RELNOTES doc/text/*txt src/NIC
+%doc index.html contrib INSTALL RELNOTES doc/text/*txt src/bin/NIC
 %{_libdir}/%{name}
 %attr(755,root,root) %{_bindir}/*
