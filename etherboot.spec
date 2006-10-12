@@ -48,7 +48,7 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %build
 # we don't use custom optimalizations here because it can cause problems
-%{__make} allcoms allelfs allisos alllisos allromss	\
+%{__make} allcoms allelfs allisos alllisos allroms	\
 	allzdsks allzhds allzlilos allzpxes allzroms	\
 	-C src CC="%{__cc}"
 
