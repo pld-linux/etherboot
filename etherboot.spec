@@ -2,20 +2,24 @@
 Summary:	Software package for booting x86 PCs over a network
 Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
 Name:		etherboot
-Version:	5.4.1
-Release:	0.1
+Version:	5.4.2
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
-# Source0-md5:	9d8666f32ca259a045130487e382f88b
+# Source0-md5:	ce257fbb3811448895aa2891940df8ac
 Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-%{_doc_version}.tar.bz2
 # Source1-md5:	1531d654a9534361c5339d931d5f92f4
 URL:		http://etherboot.sourceforge.net/
+BuildRequires:	cdrtools-mkisofs
 BuildRequires:	mtools
 BuildRequires:	perl-base
 BuildRequires:	syslinux
+BuildRequires:	syslinux
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define         _noautostrip    .*
 
 %description
 Etherboot is a free software package for booting x86 PCs over a
@@ -48,15 +52,24 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 %build
 # we don't use custom optimalizations here because it can cause problems
 %{__make} -j1 \
-	allzroms alllisos -C src \
-	CC="%{__cc}"
+	allcoms allelfs allisos alllisos allroms	\
+	allzdsks allzhds allzlilos allzpxes allzroms	\
+	-C src CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir}/%{name}/{zrom,liso},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_libdir}/%{name}/{com,elf,iso,liso,rom,zdsk,zhd,zlilo,zpxe,zrom},%{_bindir}}
 
-install src/bin/*.zrom $RPM_BUILD_ROOT%{_libdir}/%{name}/zrom
+install src/bin/*.com $RPM_BUILD_ROOT%{_libdir}/%{name}/com
+install src/bin/*.elf $RPM_BUILD_ROOT%{_libdir}/%{name}/elf
+install src/bin/*.iso $RPM_BUILD_ROOT%{_libdir}/%{name}/iso
 install src/bin/*.liso $RPM_BUILD_ROOT%{_libdir}/%{name}/liso
+install src/bin/*.rom $RPM_BUILD_ROOT%{_libdir}/%{name}/rom
+install src/bin/*.zdsk $RPM_BUILD_ROOT%{_libdir}/%{name}/zdsk
+install src/bin/*.zhd $RPM_BUILD_ROOT%{_libdir}/%{name}/zhd
+install src/bin/*.zlilo $RPM_BUILD_ROOT%{_libdir}/%{name}/zlilo
+install src/bin/*.zpxe $RPM_BUILD_ROOT%{_libdir}/%{name}/zpxe
+install src/bin/*.zrom $RPM_BUILD_ROOT%{_libdir}/%{name}/zrom
 install src/util/makerom.pl $RPM_BUILD_ROOT%{_bindir}/makerom.pl
 
 %clean
