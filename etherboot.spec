@@ -11,6 +11,9 @@ Source0:	http://dl.sourceforge.net/etherboot/%{name}-%{version}.tar.bz2
 Source1:	http://dl.sourceforge.net/etherboot/%{name}-doc-%{_doc_version}.tar.bz2
 # Source1-md5:	1531d654a9534361c5339d931d5f92f4
 URL:		http://etherboot.sourceforge.net/
+BuildRequires:	mtools
+BuildRequires:	perl-base
+BuildRequires:	syslinux
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,7 +47,8 @@ WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
 
 %build
 # we don't use custom optimalizations here because it can cause problems
-%{__make} allzroms alllisos -C src \
+%{__make} -j1 \
+	allzroms alllisos -C src \
 	CC="%{__cc}"
 
 %install
