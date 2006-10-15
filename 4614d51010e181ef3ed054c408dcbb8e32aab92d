@@ -1,0 +1,5 @@
+- updated to 4.7.13,
+- added using new rpm automation,
+- place all rom fles and tools in %{_libdir} (not in %{_datadir}),
+- removed bin86 from BuildRequires (now forcompile is used only binutils),
+- rewrited %build, %install and %files.
