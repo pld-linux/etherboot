@@ -1,6 +1,6 @@
 %define		_doc_version	5.2.2
 Summary:	Software package for booting x86 PCs over a network
-Summary(pl):	Oprogramowanie do startowania komputerów PC poprzez sieæ
+Summary(pl.UTF-8):   Oprogramowanie do startowania komputerÃ³w PC poprzez sieÄ‡
 Name:		etherboot
 Version:	5.4.2
 Release:	1
@@ -39,12 +39,12 @@ situations, for example:
   - Routers.
   - Machines doing tasks in environments unfriendly to disks.
 
-%description -l pl
-Etherboot to "wolne" oprogramowanie s³u¿±ce do startowania komputerów
-PC x86 poprzez sieæ (dowoln± sieæ TCP/IP wspieraj±c± rozg³aszanie
-adresów (broadcasting)). W praktyce wymagania co do przepustowo¶ci
-³±cz ograniczaj± zastosowanie tego pakietu w sieciach LAN i niektórych
-WAN. Etherboot jest u¿yteczny do startowania bezdyskowych PC.
+%description -l pl.UTF-8
+Etherboot to "wolne" oprogramowanie sÅ‚uÅ¼Ä…ce do startowania komputerÃ³w
+PC x86 poprzez sieÄ‡ (dowolnÄ… sieÄ‡ TCP/IP wspierajÄ…cÄ… rozgÅ‚aszanie
+adresÃ³w (broadcasting)). W praktyce wymagania co do przepustowoÅ›ci
+Å‚Ä…cz ograniczajÄ… zastosowanie tego pakietu w sieciach LAN i niektÃ³rych
+WAN. Etherboot jest uÅ¼yteczny do startowania bezdyskowych PC.
 
 %prep
 %setup -q -a1
