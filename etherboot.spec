@@ -1,6 +1,6 @@
 %define		_doc_version	5.2.2
 Summary:	Software package for booting x86 PCs over a network
-Summary(pl.UTF-8):   Oprogramowanie do startowania komputerów PC poprzez sieć
+Summary(pl.UTF-8):	Oprogramowanie do startowania komputerów PC poprzez sieć
 Name:		etherboot
 Version:	5.4.2
 Release:	1
